@@ -37,11 +37,13 @@ const frmAddList = document.getElementById("frmAddList")
 
 
 // event lisners
-btnAddList.addEventListener("click", showAddList);
-btnHideAddList.addEventListener("click", hideAddList);
+btnAddList.addEventListener("click", () => showAddOrHideelemnt(divAddList, btnAddList));
+btnHideAddList.addEventListener("click", () => showAddOrHideelemnt(btnAddList, divAddList));
 frmAddList.addEventListener("submit", (e) => {
     e.preventDefault()
     createList(txtListName.value)
+    txtListName.value = null
+
 });
 
 
@@ -49,17 +51,11 @@ frmAddList.addEventListener("submit", (e) => {
 // functions
 
 // show adding new list form
-function showAddList() {
-    divAddList.classList.remove("hidden")
-    btnAddList.classList.add("hidden")
+function showAddOrHideelemnt(show, hide) {
+    show.classList.remove("hidden")
+    hide.classList.add("hidden")
 }
 
-// hide adding new list form when clocking on close btn
-function hideAddList() {
-    divAddList.classList.add("hidden")
-    btnAddList.classList.remove("hidden")
-    txtListName.value = null
-}
 
 
 
@@ -108,7 +104,7 @@ function createList(lname) {
 
 
 //  build the lists from exist data 
-function buildList(lname, id,cards=[]) {
+function buildList(lname, id, cards = []) {
     var newDiv = document.createElement("div");
     newDiv.id = "ListContainer" + id
     newDiv.innerHTML = divdummy.innerHTML;
@@ -135,17 +131,32 @@ function buildList(lname, id,cards=[]) {
 
     // loop to create cards
     console.log(cards);
-cards.map(ca=>{
-   const card= document.createElement("h3")
-   card.innerText = ca.cardName
-   card.id = ca.idcard
-   cardsContainer.appendChild(card)
-   
+    cards.map(ca => {
+        const card = document.createElement("h3")
+        card.innerText = ca.cardName
+        card.id = ca.idcard
+        cardsContainer.appendChild(card)
 
-})
+    })
+
+    // add card functionality
+    const btnAddCardShowForm = newDiv.querySelector("#btnAddCardShowForm")
+    btnAddCardShowForm.id = btnAddCardShowForm.id + id
+
+    // find form to add card
+    const frmAddcard = newDiv.querySelector("#frmAddcard")
+    frmAddcard.id = frmAddcard.id + id
+
+    // find btn to hide form
+    const btnHideAddCardfrm = newDiv.querySelector("#btnHideAddCardfrm")
+    btnHideAddCardfrm.id = btnHideAddCardfrm.id + id
+
+
+    // show from when btn clicked or hide 
+    btnAddCardShowForm.addEventListener("click", () => showAddOrHideelemnt(frmAddcard, btnAddCardShowForm))
+    btnHideAddCardfrm.addEventListener("click", () => showAddOrHideelemnt(btnAddCardShowForm, frmAddcard))
 
     
-
 }
 
 
