@@ -44,6 +44,7 @@ frmAddList.addEventListener("submit", (e) => {
 });
 
 
+
 // functions
 function showAddList() {
     divAddList.classList.remove("hidden")
@@ -55,11 +56,32 @@ function hideAddList() {
     btnAddList.classList.remove("hidden")
     txtListName.value = null
 }
+function deleteList(element) {
+
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to delete this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const numericId1 = parseInt(element.id.replace("ListContainer", ""));
+            console.log(numericId1);
+            element.parentNode.removeChild(element);
+            Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
+            axios.delete(apiurl + `/${numericId1}`
+            ).then(res=>{console.log(res)})
+        }
+    });
+}
 
 
 function createList(lname) {
-    // var newDiv = document.createElement("div");
-    // newDiv.innerHTML = divdummy.innerHTML;
+
     const newList = {
         listName: lname
 
@@ -89,15 +111,21 @@ function buildList(lname, id) {
     const listdiv = newDiv.querySelectorAll("div")[0]
     listdiv.id = "ListCards" + id
     frmAddList.parentNode.parentNode.insertBefore(newDiv, frmAddList.parentNode);
-
+    const del = document.getElementById("DeleteAction")
+    del.id = del.id + id
+    del.addEventListener("click", () => deleteList(newDiv))
 
     // allow drag and drop 
     newDiv.addEventListener("drop", (event) => drop(event))
     newDiv.addEventListener("dragover", (event) => allowDrop(event))
     listdiv.addEventListener("dragstart", (event) => drag(event))
-    // ondragstart="drag(event)"
+
 
 }
+
+
+
+
 
 
 // drag and drop functions 
@@ -131,8 +159,8 @@ function swapElements(element1, element2) {
     var parent2 = element2.parentNode;
     var id1 = parent1.id
     var id2 = parent2.id
-    parent1.id = id2
-    parent2.id = id1
+    // parent1.id = id2
+    // parent2.id = id1
 
     parent1.append(element2)
     parent2.append(element1)
@@ -148,8 +176,8 @@ function swapElements(element1, element2) {
             [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
 
             axios.put(apiurl, arr)
-                .then(res=>console.log(res))
-                .catch(er =>console.log(er))
+                .then(res => console.log(res))
+                .catch(er => console.log(er))
 
         })
 
