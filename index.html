@@ -25,7 +25,7 @@
                 <button id="btnShowAddList" class="btn_showAddList">
                     + Add anther list
                 </button>
-                <form id="frmAddList" >
+                <form id="frmAddList">
                     <div id="IdAddListCon" class="showenAddList hidden">
                         <input id="txtListName" required type="text" placeholder="List name">
                         <button type="submit" id="btnCreateList">Add list</button>
@@ -38,13 +38,29 @@
 
             <!-- dummy card -->
 
-            <div id="dummy" class="cardCoontainer hidden">
-                <div class="containerName">
+            <div id="dummy" class="hidden" draggable="true">
+                <div draggable="true" class="cardCoontainer">
 
-                    <h3 class="ListName">dummy</h3>
-                </div>
-                <div class="card">
-                    <h3>t</h3>
+                    <div class="containerName">
+
+                        <h3 class="ListName">dummy</h3>
+                    </div>
+                    <div class="card">
+                        <h3>t</h3>
+                    </div>
+                    <div>
+
+                        <button id="btnShowAddcard" class="btn_showAddcard">
+                            + Add Card
+                        </button>
+                        <form id="frmAddCard">
+                            <div id="IdAddCardCon" class=" hidden">
+                                <input id="txtCardName" required type="text" placeholder="Card name">
+                                <button type="submit" id="btnCreatecard">Add Card</button>
+                                <button id="btnHideAddCard">X</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 

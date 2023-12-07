@@ -7,8 +7,10 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '/')));
 app.use(express.json()); 
 var id =1
-const tasks = [
-  { id: id, listName: 'container1', taskName: 'task1' },
+let tasks = [
+  { id: id, listName: 'TO DO', taskName: 'task1' },
+  { id: id+=1, listName: 'DOING', taskName: 'task1' },
+  { id: id+=1, listName: 'DONE', taskName: 'task1' },
   // Add more tasks as needed
 ];
 
@@ -50,6 +52,16 @@ app.put('/api/tasks/:id', (req, res) => {
   }
 });
 
+
+app.put('/api/tasks', (req, res) => {
+  const updatedTasks = req.body;
+  tasks = [...updatedTasks];
+  res.json(updatedTasks);
+});
+
+
+
+
 app.delete('/api/tasks/:id', (req, res) => {
   const taskId = parseInt(req.params.id);
   const index = tasks.findIndex(task => task.id === taskId);
@@ -65,3 +77,4 @@ app.delete('/api/tasks/:id', (req, res) => {
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running at http://localhost:${PORT}/`);
 });
+
