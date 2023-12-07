@@ -130,12 +130,8 @@ function buildList(lname, id, cards = []) {
     cardsContainer.id = cardsContainer.id + id
 
     // loop to create cards
-    console.log(cards);
     cards.map(ca => {
-        const card = document.createElement("h3")
-        card.innerText = ca.cardName
-        card.id = ca.idcard
-        cardsContainer.appendChild(card)
+        createCard(ca.cardName, ca.idcard, cardsContainer)
 
     })
 
@@ -156,11 +152,73 @@ function buildList(lname, id, cards = []) {
     btnAddCardShowForm.addEventListener("click", () => showAddOrHideelemnt(frmAddcard, btnAddCardShowForm))
     btnHideAddCardfrm.addEventListener("click", () => showAddOrHideelemnt(btnAddCardShowForm, frmAddcard))
 
-    
+    // find input card name
+    const inpCardName = newDiv.querySelector("#inpCardName")
+    inpCardName.id = inpCardName.id + id
+
+
+    // submit from 
+    var cardID = cardsContainer.querySelectorAll("h3").length + 1
+    console.log(cardID);
+    frmAddcard.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let newCard = createCard(inpCardName.value, cardID + "L" + id, cardsContainer)
+        addCArdToDatabase(newCard, id, cards)
+        inpCardName.value = null
+        showAddOrHideelemnt(btnAddCardShowForm, frmAddcard)
+    })
+
+
+}
+
+// create new card function
+
+function createCard(name, id, container) {
+    const divcon = document.createElement("div")
+    const card = document.createElement("h3")
+    const del = document.createElement("div")
+    del.innerHTML = "<i class='fa-regular fa-circle-xmark'></i>"
+    card.innerText = name
+    card.id = id
+    divcon.appendChild(card)
+    divcon.appendChild(del)
+    container.appendChild(divcon)
+
+    del.addEventListener("click",()=>{deleteCArd(divcon,id)})
+    return card
+}
+function deleteCArd(contanier,cardID) {
+    contanier.parentNode.removeChild(contanier)
+    deleteCardDB(cardID)
+}
+
+// database handel for card
+function deleteCardDB(cardID) {
+   let listID =cardID.split("L")[1]
+    axios.get(apiurl+`/${listID}`).
+    then(res=>{
+        let newCArds = res.data.cards.filter(card=> card.idcard !== cardID)
+        console.log(newCArds)
+        axios.put(apiurl+`/${listID}`,{cards:newCArds})
+        .then(res=>console.log(res))
+        .catch(er=>console.log(er))
+    })
+    .catch(er=>console.log(er))
+
+console.log();
 }
 
 
-
+function addCArdToDatabase(card, id, arr) {
+    const card1 = {
+        cardName: card.innerText,
+        idcard: card.id
+    }
+    let newCards = [...arr, card1]
+    axios.put(apiurl + `/${id}`, { cards: newCards })
+        .then(res => { console.log(res); }
+        ).catch(err => { console.log(err); })
+}
 
 
 

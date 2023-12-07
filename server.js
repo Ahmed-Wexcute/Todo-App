@@ -7,10 +7,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, '/')));
 app.use(express.json());
 var id = 1
+var cardid = 1
 let tasks = [
-  { id: id, listName: 'TO DO', cards: [{idcard:"card"+id, cardName: "card1" }] },
-  { id: id += 1, listName: 'DOING', cards: [{idcard:"card"+id, cardName: "card2" }] },
-  { id: id += 1, listName: 'DONE', cards: [{idcard:"card"+id, cardName: "card3" }] },
+  { id: id, listName: 'TO DO', cards: [{ idcard: cardid + "L" + id, cardName: "card1" }] },
+  { id: id += 1, listName: 'DOING', cards: [{ idcard: cardid + "L" + id, cardName: "card2" }] },
+  { id: id += 1, listName: 'DONE', cards: [{ idcard: cardid + "L" + id, cardName: "card3" }] },
   // Add more tasks as needed
 ];
 
