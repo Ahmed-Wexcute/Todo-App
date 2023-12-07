@@ -69,9 +69,9 @@ function deleteList(element) {
         confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            const numericId1 = parseInt(element.id.replace("ListContainer", ""));
-            console.log(numericId1);
-            element.parentNode.removeChild(element);
+            const numericId1 = parseInt(element.id.replace("ListCards", ""));
+            // console.log(numericId1);
+            element.parentNode.parentNode.removeChild(element.parentNode);
             Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
             axios.delete(apiurl + `/${numericId1}`
             ).then(res=>{console.log(res)})
@@ -113,7 +113,7 @@ function buildList(lname, id) {
     frmAddList.parentNode.parentNode.insertBefore(newDiv, frmAddList.parentNode);
     const del = document.getElementById("DeleteAction")
     del.id = del.id + id
-    del.addEventListener("click", () => deleteList(newDiv))
+    del.addEventListener("click", () => deleteList(listdiv))
 
     // allow drag and drop 
     newDiv.addEventListener("drop", (event) => drop(event))
@@ -159,8 +159,8 @@ function swapElements(element1, element2) {
     var parent2 = element2.parentNode;
     var id1 = parent1.id
     var id2 = parent2.id
-    // parent1.id = id2
-    // parent2.id = id1
+    parent1.id = id2
+    parent2.id = id1
 
     parent1.append(element2)
     parent2.append(element1)
