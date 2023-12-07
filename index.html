@@ -12,7 +12,7 @@
 
     <main>
         <section id="tasksLists" class="taskContainer">
-            <div class="cardCoontainer">
+            <!-- <div class="cardCoontainer">
                 <div class="containerName">
 
                     <h3>containetr1</h3>
@@ -20,16 +20,18 @@
                 <div class="card">
                     <h3>task1</h3>
                 </div>
-            </div>
+            </div> -->
             <div class="addContainer">
-                <button id="btnShowAddList"  class="btn_showAddList">
+                <button id="btnShowAddList" class="btn_showAddList">
                     + Add anther list
                 </button>
-                <div id="IdAddListCon" class="showenAddList hidden" >
-                    <input id="txtListName" type="text" placeholder="List name">
-                    <button id="btnCreateList">Add list</button>
-                    <button id="btnHideAddList">X</button>
-                </div>
+                <form id="frmAddList" >
+                    <div id="IdAddListCon" class="showenAddList hidden">
+                        <input id="txtListName" required type="text" placeholder="List name">
+                        <button type="submit" id="btnCreateList">Add list</button>
+                        <button id="btnHideAddList">X</button>
+                    </div>
+                </form>
             </div>
 
 
@@ -39,7 +41,7 @@
             <div id="dummy" class="cardCoontainer hidden">
                 <div class="containerName">
 
-                    <h3>dummy</h3>
+                    <h3 class="ListName">dummy</h3>
                 </div>
                 <div class="card">
                     <h3>t</h3>
@@ -51,7 +53,9 @@
 
 
     </main>
-<script type="module" src="./scripts/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script type="module" src="./scripts/app.js"></script>
 </body>
 
 </html>
