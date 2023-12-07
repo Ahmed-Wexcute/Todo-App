@@ -1,6 +1,36 @@
-body{
-    background-color: red;
+*{
+    margin: 0;
+    padding: 0;
 }
-h1{
-    color: red;
+body{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+
+}
+.cardCoontainer{
+    background-color: gray;
+    width: 150px;
+    border-radius: 15px;
+    padding: 10px;
+    // padding-left: 25px;
+}
+.containerName{
+    // background-color: green;
+width: 90%;
+padding: 10px;
+
+}
+.card{
+    background-color: bisque;
+    border-radius: 15px;
+width: 90%;
+padding: 10px;
+// padding-left: calc(25px - 5%);
+}
+.taskContainer{
+    display: flex;
+}
+.hidden{
+    display: none;
 }
