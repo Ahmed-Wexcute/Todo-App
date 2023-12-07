@@ -8,9 +8,10 @@ axios.get(apiurl).
         console.log(res);
 
         res.data.map(list => {
-            buildList(list.listName, list.id)
+            buildList(list.listName, list.id, list.cards)
         })
     })
+
 
 // sections
 const secTasksLists = document.getElementById("tasksLists")
@@ -46,19 +47,24 @@ frmAddList.addEventListener("submit", (e) => {
 
 
 // functions
+
+// show adding new list form
 function showAddList() {
     divAddList.classList.remove("hidden")
     btnAddList.classList.add("hidden")
 }
 
+// hide adding new list form when clocking on close btn
 function hideAddList() {
     divAddList.classList.add("hidden")
     btnAddList.classList.remove("hidden")
     txtListName.value = null
 }
+
+
+
+// delete the hole list
 function deleteList(element) {
-
-
     Swal.fire({
         title: 'Are you sure?',
         text: 'You won\'t be able to delete this!',
@@ -74,11 +80,13 @@ function deleteList(element) {
             element.parentNode.parentNode.removeChild(element.parentNode);
             Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
             axios.delete(apiurl + `/${numericId1}`
-            ).then(res=>{console.log(res)})
+            ).then(res => { console.log(res) })
         }
     });
 }
 
+
+// create new list from the form
 
 function createList(lname) {
 
@@ -95,23 +103,23 @@ function createList(lname) {
         .catch(error => {
             console.log(error);
         })
-
-
-
 }
 
 
 
-function buildList(lname, id) {
+//  build the lists from exist data 
+function buildList(lname, id,cards=[]) {
     var newDiv = document.createElement("div");
     newDiv.id = "ListContainer" + id
     newDiv.innerHTML = divdummy.innerHTML;
     newDiv.getElementsByClassName("ListName")[0].innerHTML = lname
     newDiv.classList.remove("hidden");
-    const listdiv = newDiv.querySelectorAll("div")[0]
+    let listdiv = newDiv.querySelectorAll("div")[0]
     listdiv.id = "ListCards" + id
     frmAddList.parentNode.parentNode.insertBefore(newDiv, frmAddList.parentNode);
-    const del = document.getElementById("DeleteAction")
+    // const del = document.getElementById("DeleteAction")
+    let del = newDiv.querySelector("#DeleteAction");
+
     del.id = del.id + id
     del.addEventListener("click", () => deleteList(listdiv))
 
@@ -120,6 +128,23 @@ function buildList(lname, id) {
     newDiv.addEventListener("dragover", (event) => allowDrop(event))
     listdiv.addEventListener("dragstart", (event) => drag(event))
 
+
+    // build cards 
+    let cardsContainer = newDiv.querySelector("#cardsContainer");
+    cardsContainer.id = cardsContainer.id + id
+
+    // loop to create cards
+    console.log(cards);
+cards.map(ca=>{
+   const card= document.createElement("h3")
+   card.innerText = ca.cardName
+   card.id = ca.idcard
+   cardsContainer.appendChild(card)
+   
+
+})
+
+    
 
 }
 
