@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="styles/CSSstyles/styles.css">
+    <link rel="stylesheet" href="styles/CSSstyles/styles.css">
     <title>Todo App</title>
 </head>
+
 <body>
-    hic
+
+    <main>
+        <section class="taskContainer">
+            <div class="cardCoontainer">
+                <div class="containerName">
+
+                    <h3>containetr1</h3>
+                </div>
+                <div class="card">
+                    <h3>task1</h3>
+                </div>
+            </div>
+            <div class="addContainer">
+                <button id="btnShowAddList"  class="btn_showAddList">
+                    + Add anther list
+                </button>
+                <div id="IdAddListCon" class="showenAddList hidden" >
+                    <input type="text" placeholder="List name">
+                    <button>Add list</button>
+                    <button>X</button>
+                </div>
+            </div>
+
+        </section>
 
 
+    </main>
+<script type="module" src="./scripts/app.js"></script>
 </body>
+
 </html>
