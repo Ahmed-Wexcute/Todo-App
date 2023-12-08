@@ -180,6 +180,7 @@ function createCard(name, id, container) {
     card.innerText = name
     card.id = id
     divcondrop.id = "Bcon" + id
+    divcon.classList.add("singleCard")
     divcon.id = "con" + id
 
     divcon.draggable = true

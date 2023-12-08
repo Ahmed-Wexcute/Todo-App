@@ -12,24 +12,24 @@
 
     <main>
         <section id="tasksLists" class="taskContainer">
-            <!-- <div class="cardCoontainer">
-                <div class="containerName">
 
-                    <h3>containetr1</h3>
-                </div>
-                <div class="card">
-                    <h3>task1</h3>
-                </div>
-            </div> -->
             <div class="addContainer">
-                <button id="btnShowAddList" class="btn_showAddList">
-                    + Add anther list
-                </button>
+                <div id="btnShowAddList" class="ShowBtn shwbtnList">
+                    <i class="fa-solid fa-plus"></i>
+
+                    <p>Add anther list</p>
+                </div>
                 <form id="frmAddList">
-                    <div id="IdAddListCon" class="showenAddList hidden">
-                        <input id="txtListName" required type="text" placeholder="List name">
-                        <button type="submit" id="btnCreateList">Add list</button>
-                        <button id="btnHideAddList">X</button>
+                    <div id="IdAddListCon" class="flxCl hidden">
+                        <input class="singleCard frmInput fromInpList" id="txtListName" required type="text" placeholder="List name">
+                        <div class="flxR">
+
+                            <button type="submit" id="btnCreateList" class="btnSubmit">Add list</button>
+                            <p id="btnHideAddList" class="btnClose">
+                                <i class="fa-solid fa-xmark"></i>
+
+                            </p>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -40,33 +40,43 @@
 
             <div id="dummy" class="hidden" draggable="true">
                 <div draggable="true" class="cardCoontainer">
-                    <div>
-                        <div id="DeleteAction">
+                    <div class="cardHeading">
 
-                            <i class="fa-solid fa-trash"></i>
+                        <div>
+                            <div id="DeleteAction">
+
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </div>
+
+                        <div class="containerName">
+
+                            <h3 class="ListName">dummy</h3>
                         </div>
                     </div>
+                    <div class="flxCl">
 
-                    <div class="containerName">
-
-                        <h3 class="ListName">dummy</h3>
-                    </div>
-                    <div>
-
-                        <div id="cardsContainer"> <!-- have the id of list -->
+                        <div id="cardsContainer" class="flxCl"> <!-- have the id of list -->
                             <!-- cards here -->
                         </div>
 
                         <div>
 
-                            <button id="btnAddCardShowForm">
-                                + Add Card
+                            <button id="btnAddCardShowForm" class="ShowBtn">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Add Card</p>
                             </button>
-                            <form id="frmAddcard" class="hidden">
-                                <div>
-                                    <input id="inpCardName" required type="text" placeholder="Card name">
-                                    <button type="submit">Add Card</button>
-                                    <button id="btnHideAddCardfrm">X</button>
+                            <form id="frmAddcard" class="hidden ">
+                                <div class="flxCl">
+                                    <input class="singleCard frmInput" id="inpCardName" required type="text"
+                                        placeholder="Card name">
+                                    <div class="flxR">
+
+                                        <button type="submit" class="btnSubmit">Add Card</button>
+                                        <p id="btnHideAddCardfrm" class="btnClose">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </p>
+                                    </div>
                                 </div>
                             </form>
                         </div>

@@ -1,36 +1,150 @@
-*{
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;1,100;1,200&display=swap");
+
+* {
     margin: 0;
     padding: 0;
 }
-body{
+
+body {
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
-
+    background-color: #cd5a91;
 }
-.cardCoontainer{
-    background-color: gray;
-    width: 150px;
+
+.taskContainer {
+    display: flex;
+    gap: 30px;
+    padding: 50px 25px;
+}
+
+.cardCoontainer {
+    background-color: #f1f2f4;
+    width: 230px;
     border-radius: 15px;
     padding: 10px;
-    // padding-left: 25px;
 }
-.containerName{
-    // background-color: green;
-width: 90%;
-padding: 10px;
 
+.cardHeading {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10px;
 }
-.singleCard{
-    background-color: bisque;
-    border-radius: 15px;
-width: 90%;
-padding: 10px;
-// padding-left: calc(25px - 5%);
+
+.ListName {
+    width: 90%;
+    padding: 10px;
+    color: #4f5560;
+    font-size: 0.8rem;
+    font-size: 1rem;
 }
-.taskContainer{
+
+.singleCard {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px gray;
+    box-shadow: 1px 1px 1px 1px rgb(200, 200, 200);
+    color: #6e7582;
+    font-family: "Raleway", sans-serif;
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+}
+
+.flxCl {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.flxR {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+.ShowBtn {
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    text-align: left;
+    padding: 6px;
+    border-radius: 8px;
+    color: #44546f;
+    display: flex;
+    gap: 15px;
+}
+
+.ShowBtn:hover {
+    background-color: rgb(204, 204, 204);
+}
+
+.taskContainer {
     display: flex;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
+
+.frmInput {
+    height: 40px;
+    border: none;
+    box-shadow: 1px 1px 2px 2px rgb(200, 200, 200);
+    vertical-align: top;
+}
+.btnSubmit{
+    background-color: #1862e1;
+    color: white;
+    width: 90px;
+    padding: 6px;
+    border-radius: 2px;
+    font-size: .9rem;
+    border: none;
+    letter-spacing: 1.3px;
+}
+.btnClose{
+    background-color: transparent;
+    border: none;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+i.fa-solid.fa-xmark {
+    font-size: 20px; }
+
+    .btnClose:hover{
+        background-color: rgb(204, 204, 204);
+        border-radius: 3px;
+    }
+    
+    .btnSubmit:hover{
+        background-color:#0a55cb;
+        border-radius: 3px;
+    }
+    .shwbtnList{
+        background-color: rgba(185, 198, 205, 0.3);
+        width: 200px;
+        color: white;
+        padding: 15px;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+    .shwbtnList:hover{
+        background-color: rgba(222, 146, 146, 0.319);
+
+
+    }
+    .fromInpList{
+        width: 200px;
+    }
