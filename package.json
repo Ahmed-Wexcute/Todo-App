@@ -2,13 +2,18 @@
   "name": "todo-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "server.js",
   "scripts": {
+    "start": "npm run sass && node ./server.js  ",
+    "sass": "node ./scripts/ConvertStyles.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "axios": "^1.6.2",
+    "express": "^4.18.2",
+    "sass": "^1.69.5"
   }
 }

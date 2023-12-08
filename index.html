@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/CSSstyles/styles.css">
+    <title>Todo App</title>
+</head>
+
+<body>
+
+    <main>
+        <section id="tasksLists" class="taskContainer">
+
+            <div class="addContainer">
+                <div id="btnShowAddList" class="ShowBtn shwbtnList">
+                    <i class="fa-solid fa-plus"></i>
+
+                    <p>Add anther list</p>
+                </div>
+                <form id="frmAddList">
+                    <div id="IdAddListCon" class="flxCl hidden">
+                        <input class="singleCard frmInput fromInpList" id="txtListName" required type="text" placeholder="List name">
+                        <div class="flxR">
+
+                            <button type="submit" id="btnCreateList" class="btnSubmit">Add list</button>
+                            <p id="btnHideAddList" class="btnClose">
+                                <i class="fa-solid fa-xmark"></i>
+
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <!-- dummy card -->
+
+            <div id="dummy" class="hidden" draggable="true">
+                <div draggable="true" class="cardCoontainer">
+                    <div class="cardHeading">
+
+                        <div>
+                            <div id="DeleteAction">
+
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                        </div>
+
+                        <div class="containerName">
+
+                            <h3 class="ListName">dummy</h3>
+                        </div>
+                    </div>
+                    <div class="flxCl">
+
+                        <div id="cardsContainer" class="flxCl"> <!-- have the id of list -->
+                            <!-- cards here -->
+                        </div>
+
+                        <div>
+
+                            <button id="btnAddCardShowForm" class="ShowBtn">
+                                <i class="fa-solid fa-plus"></i>
+                                <p>Add Card</p>
+                            </button>
+                            <form id="frmAddcard" class="hidden ">
+                                <div class="flxCl">
+                                    <input class="singleCard frmInput" id="inpCardName" required type="text"
+                                        placeholder="Card name">
+                                    <div class="flxR">
+
+                                        <button type="submit" class="btnSubmit">Add Card</button>
+                                        <p id="btnHideAddCardfrm" class="btnClose">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end dummy card -->
+        </section>
+
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://kit.fontawesome.com/4db8f5b4fb.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./scripts/taskList.js"></script>
+</body>
+
+</html>
