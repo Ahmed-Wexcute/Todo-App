@@ -10,7 +10,143 @@
 
 <body>
 
-    <main>
+    <main class=" main flx-str flx-cl">
+        <form class="to-do-add-container flx-center" id="task-form">
+            <div class="main-input">
+                <div class="circle-input flx-center">
+
+                    <div class="circles-container flx-center">
+                        <div class="cirlce burble"></div>
+                        <div class="cirlce blue"></div>
+                        <div class="cirlce yellow"></div>
+                    </div>
+
+                    <div class="input-field-container">
+                        <input placeholder="What is your next task?" class="input-task" type="text" name="" id="task-input-value">
+                    </div>
+                </div>
+                <div class="icons-container flx-center">
+                    <input type="time" class="time-input" id="time-input" >
+                    <!-- <i for="time-input" class="fa-regular fa-clock"></i> -->
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+            </div>
+
+        </form>
+        <section class="lists-container  flx-str">
+
+            <section class="list flx-center flx-cl" id="to-do">
+                <h1 class="list-name ">TO DO</h1>
+                <div   class="cards-container flx-bt flx-cl">
+                    <!-- <div draggable=true class="card flx-bt">
+
+                        <div class="circle-input flx-center">
+
+                            <div class="circles-container flx-center">
+                                <div class="cirlce yellow"></div>
+                            </div>
+
+                            <div class="input-field-container flx-center">
+                                <p class="task-name ">task1</p>
+                            </div>
+                        </div>
+                        <div class="r-container flx-center">
+                            <div class="time">
+                                <p class="time-value">8:00 am</p>
+                            </div>
+                            <div class="icons-container flx-center">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+            <section class="list flx-center flx-cl" id="doing">
+                <h1 class="list-name"> DOING</h1>
+                <div   class="cards-container flx-bt flx-cl">
+                    <!-- <div draggable=true class="card flx-bt">
+
+                        <div class="circle-input flx-center">
+
+                            <div class="circles-container flx-center">
+                                <div class="cirlce yellow"></div>
+                            </div>
+
+                            <div class="input-field-container flx-center">
+                                <p class="task-name ">task2</p>
+                            </div>
+                        </div>
+                        <div class="r-container flx-center">
+                            <div class="time">
+                                <p class="time-value">82:00 am</p>
+                            </div>
+                            <div class="icons-container flx-center">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+            <section class="list flx-center flx-cl" id="done">
+                <h1 class="list-name">DONE</h1>
+                <div  class="cards-container flx-bt flx-cl">
+                    <!-- <div draggable=true class="card flx-bt">
+
+                        <div class="circle-input flx-center">
+
+                            <div class="circles-container flx-center">
+                                <div class="cirlce yellow"></div>
+                            </div>
+
+                            <div class="input-field-container flx-center">
+                                <p class="task-name ">task3</p>
+                            </div>
+                        </div>
+                        <div class="r-container flx-center">
+                            <div class="time">
+                                <p class="time-value">83:00 am</p>
+                            </div>
+                            <div class="icons-container flx-center">
+                                <i class="fa-solid fa-xmark del"></i>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+        </section>
+
+
+
+
+    </main>
+
+
+
+    <div class="card flx-bt hidden" id="dummy-card">
+
+        <div class="circle-input flx-center">
+
+            <div class="circles-container flx-center">
+                <div class="cirlce "></div>
+            </div>
+
+            <div class="input-field-container flx-center">
+                <p class="task-name ">task1</p>
+            </div>
+        </div>
+        <div class="r-container flx-center">
+            <div class="time">
+                <p class="time-value">8:00 am</p>
+            </div>
+            <div class="icons-container flx-center ">
+               <div class="del">
+
+                   <i class="fa-solid fa-xmark "></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <main>
         <section id="tasksLists" class="taskContainer">
 
             <div class="addContainer">
@@ -21,7 +157,8 @@
                 </div>
                 <form id="frmAddList">
                     <div id="IdAddListCon" class="flxCl hidden">
-                        <input class="singleCard frmInput fromInpList" id="txtListName" required type="text" placeholder="List name">
+                        <input class="singleCard frmInput fromInpList" id="txtListName" required type="text"
+                            placeholder="List name">
                         <div class="flxR">
 
                             <button type="submit" id="btnCreateList" class="btnSubmit">Add list</button>
@@ -33,12 +170,12 @@
                     </div>
                 </form>
             </div>
+ -->
 
 
+    <!-- dummy card -->
 
-            <!-- dummy card -->
-
-            <div id="dummy" class="hidden" draggable="true">
+    <!-- <div id="dummy" class="hidden" draggable="true">
                 <div draggable="true" class="cardCoontainer">
                     <div class="cardHeading">
 
@@ -56,9 +193,8 @@
                     </div>
                     <div class="flxCl">
 
-                        <div id="cardsContainer" class="flxCl"> <!-- have the id of list -->
-                            <!-- cards here -->
-                        </div>
+                        <div id="cardsContainer" class="flxCl"> 
+                     </div> 
 
                         <div>
 
@@ -82,13 +218,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <!-- end dummy card -->
-        </section>
+    <!-- end dummy card -->
+    <!-- </section>
+    <a href="app/pages/Todo2.html">App2</a>
 
-
-    </main>
+    </main> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/4db8f5b4fb.js" crossorigin="anonymous"></script>
 
