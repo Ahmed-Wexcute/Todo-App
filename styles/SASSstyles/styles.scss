@@ -1,150 +1,357 @@
+@use 'base';
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;1,100;1,200&display=swap");
 
+$circleDim: 12px;
+$containerW: 440px;
+$containercards: 388px;
+$containerC: 46px;
+$containerH: 50px;
+
+$blueColor : #a48cfb;
+$whiteColor :#fafafb;
+$grayColor :#7f858c;
+$yelloColor: #fac608;
+$lightBlueColor: #40d4f4;
+$lightBrownColor: #b49baa;
+$color-iconc :#cf97fd;
+// $grayColor2: #0a0ae0df;
+$lightYelloColor: #bcb7af;
+$burbleColor:#fd99af;
+
+
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
+
 
 body {
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
-    background-color: #cd5a91;
+    background-color: base.$blueColor;
+    background-image: url("https://i.pinimg.com/736x/ac/54/a1/ac54a128942c750799c2c1fe144d2467.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-
-.taskContainer {
-    display: flex;
-    gap: 30px;
-    padding: 50px 25px;
-}
-
-.cardCoontainer {
-    background-color: #f1f2f4;
-    width: 230px;
-    border-radius: 15px;
-    padding: 10px;
-}
-
-.cardHeading {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    align-items: center;
-    padding-right: 10px;
-}
-
-.ListName {
-    width: 90%;
-    padding: 10px;
-    color: #4f5560;
-    font-size: 0.8rem;
-    font-size: 1rem;
-}
-
-.singleCard {
-    background-color: #ffffff;
-    border-radius: 10px;
-    width: 90%;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 2px gray;
-    box-shadow: 1px 1px 1px 1px rgb(200, 200, 200);
-    color: #6e7582;
-    font-family: "Raleway", sans-serif;
-    font-weight: 200;
-    font-size: 0.7rem;
-    letter-spacing: 1.5px;
-}
-
-.flxCl {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.flxR {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-
-.ShowBtn {
+.main{
     width: 100%;
-    border: none;
-    font-size: 1rem;
-    text-align: left;
-    padding: 6px;
-    border-radius: 8px;
-    color: #44546f;
+    margin-left: 50px;
+    
+}
+.to-do-add-container {
+    margin: 20px 20px;
+    width: 100%;
+}
+
+.main-input {
+    background-color: $whiteColor;
+    width: $containerW;
+    height: $containerH;
+    border-radius: 16px;
     display: flex;
-    gap: 15px;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.ShowBtn:hover {
-    background-color: rgb(204, 204, 204);
+.circle-input {
+    height: 100%;
+
 }
 
-.taskContainer {
-    display: flex;
-}
-
-.hidden {
-    display: none;
-}
-
-.frmInput {
-    height: 40px;
-    border: none;
-    box-shadow: 1px 1px 2px 2px rgb(200, 200, 200);
-    vertical-align: top;
-}
-.btnSubmit{
-    background-color: #1862e1;
-    color: white;
-    width: 90px;
-    padding: 6px;
-    border-radius: 2px;
-    font-size: .9rem;
-    border: none;
-    letter-spacing: 1.3px;
-}
-.btnClose{
-    background-color: transparent;
-    border: none;
-    height: 28px;
-    width: 28px;
+.flx-center {
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
+
+.circles-container {
+    gap: calc($circleDim /2);
+    padding: calc($circleDim * 1.2);
+    height: 100%;
+
+
+}
+
+.cirlce {
+    width: $circleDim;
+    height: $circleDim;
+    border-radius: 50%;
+}
+
+.burble {
+    background-color:
+        $burbleColor;
+
+
+}
+
+.blue {
+    background-color:
+        $lightBlueColor;
+}
+
+.yellow {
+    background-color:
+        $yelloColor;
+}
+
+.input-field-container {
+    height: 100%;
+
+
+}
+
+.input-task {
+
+    // padding: 0 5px;
+    height: 100%;
+    border: none;
+    background-color: inherit;
+    width: 100%;
+}
+
+.input-task::placeholder {
+    color:
+        lighten($grayColor, 25%);
+    // color: $grayColor;
+    letter-spacing: 1.01px;
+    word-spacing: .2px;
+}
+
+.input-task:focus {
+    border: none;
+    outline: none;
+
+}
+
+.icons-container {
+    gap: 10px;
+    padding: 15px;
+
+}
+
+.del {
+    color: $blueColor;
+    border-radius: 100%;
+    width: 24px;
+    height: 24px;
+    border: solid $blueColor 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+font-size: .1px;
+size: 1px;
+}
+
+.cards-container {
+    // background-color: $whiteColor;
+    // width: $containercards;
+    // height: $containerC;
+    // border-radius: 16px;
+    gap: 16px;
+    min-height: $containerH;
+    min-width: $containerW;
+}
+
+.flx-bt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.task-name {
+    width: 160px;
+    padding-left: 12px;
+    color: $grayColor;
+    font-size: 1.3rem;
+
+}
+
+.time {
+    padding-right: 24px;
+    color: $grayColor;
+}
+
+.card {
+    background-color: $whiteColor;
+    width: $containercards;
+    height: $containerC;
+    border-radius: 16px;
+}
+
+.list {
+    width: calc($containercards + 32px);
+    // width: 600px;
+    background-color: #ebe9ea;
+    padding:0 0 32px 0;
+    border-radius: 32px;
+}
+
+.flx-cl {
+    flex-direction: column;
+}
+.list-name{
+padding: 8px;
+color: black;
+font-size: 1.5em;
+}
+.flx-str{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 48px;
+    flex-shrink: 1;
+}
+.time-input{
+    border: none;
+    color: $grayColor;
+}
+
+// .taskContainer {
+//     display: flex;
+//     gap: 30px;
+//     padding: 50px 25px;
+// }
+
+// .cardCoontainer {
+//     background-color: #f1f2f4;
+//     width: 230px;
+//     border-radius: 15px;
+//     padding: 10px;
+
+//     .cardHeading {
+//         display: flex;
+//         flex-direction: row-reverse;
+//         justify-content: space-between;
+//         align-items: center;
+//         padding-right: 10px;
+//     }
+// }
+
+// .ListName {
+//     width: 90%;
+//     padding: 10px;
+//     color: #4f5560;
+//     font-size: 0.8rem;
+//     font-size: 1rem;
+// }
+
+// .singleCard {
+//     background-color: #ffffff;
+//     border-radius: 10px;
+//     width: 90%;
+//     padding: 10px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     box-shadow: 2px gray;
+//     box-shadow: 1px 1px 1px 1px rgb(200, 200, 200);
+//     color: #6e7582;
+//     font-family: "Raleway", sans-serif;
+//     font-weight: 200;
+//     font-size: 0.7rem;
+//     letter-spacing: 1.5px;
+// }
+
+// .flxCl {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 15px;
+// }
+
+// .flxR {
+//     display: flex;
+//     flex-direction: row;
+//     gap: 10px;
+// }
+
+
+// .ShowBtn {
+//     width: 100%;
+//     border: none;
+//     font-size: 1rem;
+//     text-align: left;
+//     padding: 6px;
+//     border-radius: 8px;
+//     color: #44546f;
+//     display: flex;
+//     gap: 15px;
+// }
+
+// .ShowBtn:hover {
+//     background-color: rgb(204, 204, 204);
+// }
+
+// .taskContainer {
+//     display: flex;
+// }
+
+.hidden {
+    display: none;
+}
+
+// .frmInput {
+//     height: 40px;
+//     border: none;
+//     box-shadow: 1px 1px 2px 2px rgb(200, 200, 200);
+//     vertical-align: top;
+// }
+
+// .btnSubmit {
+//     background-color: #1862e1;
+//     color: white;
+//     width: 90px;
+//     padding: 6px;
+//     border-radius: 2px;
+//     font-size: .9rem;
+//     border: none;
+//     letter-spacing: 1.3px;
+// }
+
+// .btnClose {
+//     background-color: transparent;
+//     border: none;
+//     height: 28px;
+//     width: 28px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+// }
+
 i.fa-solid.fa-xmark {
-    font-size: 20px; }
+    font-size: 20px;
+}
 
-    .btnClose:hover{
-        background-color: rgb(204, 204, 204);
-        border-radius: 3px;
-    }
-    
-    .btnSubmit:hover{
-        background-color:#0a55cb;
-        border-radius: 3px;
-    }
-    .shwbtnList{
-        background-color: rgba(185, 198, 205, 0.3);
-        width: 200px;
-        color: white;
-        padding: 15px;
-        font-weight: 600;
-        font-size: 1.2rem;
-    }
-    .shwbtnList:hover{
-        background-color: rgba(222, 146, 146, 0.319);
+// .btnClose:hover {
+//     background-color: rgb(204, 204, 204);
+//     border-radius: 3px;
+// }
+
+// .btnSubmit:hover {
+//     background-color: #0a55cb;
+//     border-radius: 3px;
+// }
+
+// .shwbtnList {
+//     background-color: rgba(185, 198, 205, 0.3);
+//     width: 200px;
+//     color: white;
+//     padding: 15px;
+//     font-weight: 600;
+//     font-size: 1.2rem;
+// }
+
+// .shwbtnList:hover {
+//     background-color: rgba(222, 146, 146, 0.319);
 
 
-    }
-    .fromInpList{
-        width: 200px;
-    }
+// }
+
+// .fromInpList {
+//     width: 200px;
+// }
