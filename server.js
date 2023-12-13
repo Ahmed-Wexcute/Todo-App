@@ -9,9 +9,9 @@ app.use(express.json());
 var id = 1
 var cardid = 1
 let tasks = [
-  { id: id, listName: 'TO DO', cards: [{ idcard: cardid + "L" + id, cardName: "card1" }] },
-  { id: id += 1, listName: 'DOING', cards: [{ idcard: cardid + "L" + id, cardName: "card2" }] },
-  { id: id += 1, listName: 'DONE', cards: [{ idcard: cardid + "L" + id, cardName: "card3" }] },
+  { id: id, listName: 'to-do', cards: [{ idcard:  cardid, cardName: "card1",time:"8:00 am" }] },
+  { id: id += 1, listName: 'doning', cards: [{ idcard: cardid , cardName: "card2",time:"9:00 am" }] },
+  { id: id += 1, listName: 'done', cards: [{ idcard: cardid , cardName: "card3" ,time:"10:00 am"}] },
   // Add more tasks as needed
 ];
 
@@ -41,6 +41,7 @@ app.post('/api/tasks', (req, res) => {
 });
 
 app.put('/api/tasks/:id', (req, res) => {
+  
   const taskId = parseInt(req.params.id);
   const updatedTask = req.body;
   const index = tasks.findIndex(task => task.id === taskId);
