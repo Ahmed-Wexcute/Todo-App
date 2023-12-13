@@ -1,0 +1,179 @@
+$circleDim: 12px;
+$containerW: 640px;
+$containercards: 448px;
+$containerC: 50px;
+$containerH: 50px;
+
+$blueColor : #a48cfb;
+$whiteColor :#fafafb;
+$grayColor :#7f858c;
+$yelloColor: #fac608;
+$lightBlueColor: #40d4f4;
+$lightBrownColor: #b49baa;
+$color-iconc :#cf97fd;
+// $grayColor2: #0a0ae0df;
+$lightYelloColor: #bcb7af;
+$burbleColor:#fd99af;
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $blueColor;
+}
+
+.to-do-add-container {
+    margin: 200px 50px;
+}
+
+.main-input {
+    background-color: $whiteColor;
+    width: $containerW;
+    height: $containerH;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.circle-input {
+    height: 100%;
+
+}
+
+.flx-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.circles-container {
+    gap: calc($circleDim /2);
+    padding: calc($circleDim * 1.2);
+    height: 100%;
+
+
+}
+
+.cirlce {
+    width: $circleDim;
+    height: $circleDim;
+    border-radius: 50%;
+}
+
+.burble {
+    background-color:
+        $burbleColor;
+
+
+}
+
+.blue {
+    background-color:
+        $lightBlueColor;
+}
+
+.yellow {
+    background-color:
+        $yelloColor;
+}
+
+.input-field-container {
+    height: 100%;
+
+
+}
+
+.input-task {
+
+    // padding: 0 5px;
+    height: 100%;
+    border: none;
+    background-color: inherit;
+    width: 100%;
+}
+
+.input-task::placeholder {
+    color:
+        lighten($grayColor, 25%);
+    // color: $grayColor;
+    letter-spacing: 1.01px;
+    word-spacing: .2px;
+}
+
+.input-task:focus {
+    border: none;
+    outline: none;
+
+}
+
+.icons-container {
+    gap: 10px;
+    padding: 15px;
+
+}
+
+.icons-container i {
+    color: $blueColor;
+
+}
+
+.cards-container {
+    background-color: $whiteColor;
+    width: $containercards;
+    height: $containerC;
+    border-radius: 16px;
+}
+
+.flx-bt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.task-name {
+    width: 160px;
+    padding-left: 12px;
+    color: $grayColor;
+    font-size: 1.3rem;
+
+}
+
+.time {
+    padding-right: 24px;
+    color: $grayColor;
+}
+
+.card {
+    width: 100%;
+}
+
+.list {
+    width: calc($containercards + 48px);
+    // width: 600px;
+    background-color: #ebe9ea;
+    padding:0 0 48px 0;
+    border-radius: 32px;
+}
+
+.flx-cl {
+    flex-direction: column;
+}
+.list-name{
+padding: 16px;
+color: black;
+font-size: 1.5em;
+}
+.flx-str{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 48px;
+    flex-shrink: 1;
+}

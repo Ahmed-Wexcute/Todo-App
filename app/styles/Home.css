@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #a48cfb;
+}
+
+.to-do-add-container {
+  margin: 200px 50px;
+}
+
+.main-input {
+  background-color: #fafafb;
+  width: 640px;
+  height: 50px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.circle-input {
+  height: 100%;
+}
+
+.flx-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circles-container {
+  gap: 6px;
+  padding: 14.4px;
+  height: 100%;
+}
+
+.cirlce {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.burble {
+  background-color: #fd99af;
+}
+
+.blue {
+  background-color: #40d4f4;
+}
+
+.yellow {
+  background-color: #fac608;
+}
+
+.input-field-container {
+  height: 100%;
+}
+
+.input-task {
+  height: 100%;
+  border: none;
+  background-color: inherit;
+  width: 100%;
+}
+
+.input-task::placeholder {
+  color: #c2c5c8;
+  letter-spacing: 1.01px;
+  word-spacing: 0.2px;
+}
+
+.input-task:focus {
+  border: none;
+  outline: none;
+}
+
+.icons-container {
+  gap: 10px;
+  padding: 15px;
+}
+
+.icons-container i {
+  color: #a48cfb;
+}
+
+.cards-container {
+  background-color: #fafafb;
+  width: 448px;
+  height: 50px;
+  border-radius: 16px;
+}
+
+.flx-bt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-name {
+  width: 160px;
+  padding-left: 12px;
+  color: #7f858c;
+  font-size: 1.3rem;
+}
+
+.time {
+  padding-right: 24px;
+  color: #7f858c;
+}
+
+.card {
+  width: 100%;
+}
+
+.list {
+  width: 496px;
+  background-color: #ebe9ea;
+  padding: 0 0 48px 0;
+  border-radius: 32px;
+}
+
+.flx-cl {
+  flex-direction: column;
+}
+
+.list-name {
+  padding: 16px;
+  color: black;
+  font-size: 1.5em;
+}
+
+.flx-str {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 48px;
+  flex-shrink: 1;
+}
+
+/*# sourceMappingURL=Home.css.map */
