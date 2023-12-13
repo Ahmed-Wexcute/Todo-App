@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "npm run sass && node ./server.js  ",
-    "sass": "node ./scripts/ConvertStyles.js",
+    "start": "npm-run-all --parallel server sass sass2",
+    "server": "node ./server.js ",
+    "sass1": "node ./scripts/ConvertStyles.js",
+    "sass": "sass --watch ./app/styles/Home.scss ./app/styles/Home.css",
+    "sass2": "sass --watch ./styles/SASSstyles/styles.scss ./styles/CSSstyles/styles.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,5 +18,8 @@
     "axios": "^1.6.2",
     "express": "^4.18.2",
     "sass": "^1.69.5"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }

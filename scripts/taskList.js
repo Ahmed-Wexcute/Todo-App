@@ -1,216 +1,299 @@
 // api
 const apiurl = "/api/tasks"
+const toDo_list = document.getElementById("to-do")
+const doing_list = document.getElementById("doing")
+const done_list = document.getElementById("done")
+
+// console.log(done_list);
+// createCard("card.cardName", "card.time", done_list)
 
 // generate lists from exist data 
-
 axios.get(apiurl).
     then(res => {
         console.log(res);
+        let parent = toDo_list
+        res.data.map((list, i) => {
+            // console.log(i);
+            // console.log(list);
 
-        res.data.map(list => {
-            buildList(list.listName, list.id, list.cards)
+            if (i == 1) {
+                parent = doing_list
+
+            } else if (i == 2) {
+                parent = done_list
+
+            }
+            list.cards.map(card => {
+
+                createCard(card.cardName, card.time, parent)
+            })
+
         })
     })
 
 
+const cards = document.querySelectorAll(".cards-container")
+cards.forEach(card => {
+    card.addEventListener("drop", (event) => dropCard(event))
+    card.addEventListener("dragover", (event) => allowDrop(event))
+})
+
+const deletes = document.querySelectorAll(".fa-xmark")
+deletes.forEach(sy => {
+    sy.addEventListener("click", (e) => {
+        deleteCArd(e)
+        console.log("de");
+    })
+
+})
 // sections
-const secTasksLists = document.getElementById("tasksLists")
+// const secTasksLists = document.getElementById("tasksLists")
 
 
-// divs
-const divAddList = document.getElementById("IdAddListCon")
-const divdummy = document.getElementById("dummy")
+// // divs
+// const divAddList = document.getElementById("IdAddListCon")
+// const divdummy = document.getElementById("dummy")
 
 
-// btns
-const btnAddList = document.getElementById("btnShowAddList")
-const btnCreateList = document.getElementById("btnCreateList")
-const btnHideAddList = document.getElementById("btnHideAddList")
+// // btns
+// const btnAddList = document.getElementById("btnShowAddList")
+// const btnCreateList = document.getElementById("btnCreateList")
+// const btnHideAddList = document.getElementById("btnHideAddList")
 
-// txt
-const txtListName = document.getElementById("txtListName")
+// // txt
+const txtListName = document.getElementById("task-input-value")
+const time = document.getElementById("time-input")
 
 
-// form
-const frmAddList = document.getElementById("frmAddList")
+// // form
+const frm_card = document.getElementById("task-form")
 
 
 
 // event lisners
-btnAddList.addEventListener("click", () => showAddOrHideelemnt(divAddList, btnAddList));
-btnHideAddList.addEventListener("click", () => showAddOrHideelemnt(btnAddList, divAddList));
-frmAddList.addEventListener("submit", (e) => {
+frm_card.addEventListener("submit", (e) => {
     e.preventDefault()
-    createList(txtListName.value)
+    addCArdToDatabase(txtListName.value, time.value)
+    createCard(txtListName.value, time.value)
     txtListName.value = null
+    time.value = null
 
 });
+// btnAddList.addEventListener("click", () => showAddOrHideelemnt(divAddList, btnAddList));
+// btnHideAddList.addEventListener("click", () => showAddOrHideelemnt(btnAddList, divAddList));
 
 
 
 // functions
 
 // show adding new list form
-function showAddOrHideelemnt(show, hide) {
-    show.classList.remove("hidden")
-    hide.classList.add("hidden")
-}
+// function showAddOrHideelemnt(show, hide) {
+//     show.classList.remove("hidden")
+//     hide.classList.add("hidden")
+// }
 
 
 
 
 // delete the hole list
-function deleteList(element) {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You won\'t be able to delete this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            const numericId1 = parseInt(element.id.replace("ListCards", ""));
-            // console.log(numericId1);
-            element.parentNode.parentNode.removeChild(element.parentNode);
-            Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
-            axios.delete(apiurl + `/${numericId1}`
-            ).then(res => { console.log(res) })
-        }
-    });
-}
+
+
+// function deleteList(element) {
+//     Swal.fire({
+//         title: 'Are you sure?',
+//         text: 'You won\'t be able to delete this!',
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             const numericId1 = parseInt(element.id.replace("ListCards", ""));
+//             // console.log(numericId1);
+//             element.parentNode.parentNode.removeChild(element.parentNode);
+//             Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
+//             axios.delete(apiurl + `/${numericId1}`
+//             ).then(res => { console.log(res) })
+//         }
+//     });
+// }
 
 
 // create new list from the form
 
-function createList(lname) {
+// function createList(lname) {
 
-    const newList = {
-        listName: lname
+//     const newList = {
+//         listName: lname
 
-    }
-    axios.post(apiurl, newList)
-        .then(res => {
-            buildList(lname, res.data.id)
-            hideAddList()
+//     }
+//     axios.post(apiurl, newList)
+//         .then(res => {
+//             buildList(lname, res.data.id)
+//             hideAddList()
 
-        })
-        .catch(error => {
-            console.log(error);
-        })
-}
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+// }
 
 
 
 //  build the lists from exist data 
-function buildList(lname, id, cards = []) {
-    var newDiv = document.createElement("div");
-    newDiv.id = "ListContainer" + id
-    newDiv.innerHTML = divdummy.innerHTML;
-    newDiv.getElementsByClassName("ListName")[0].innerHTML = lname
-    newDiv.classList.remove("hidden");
-    let listdiv = newDiv.querySelectorAll("div")[0]
-    listdiv.id = "ListCards" + id
-    frmAddList.parentNode.parentNode.insertBefore(newDiv, frmAddList.parentNode);
-    // const del = document.getElementById("DeleteAction")
-    let del = newDiv.querySelector("#DeleteAction");
+// function buildList(lname, id, cards = []) {
+//     var newDiv = document.createElement("div");
+//     newDiv.id = "ListContainer" + id
+//     newDiv.innerHTML = divdummy.innerHTML;
+//     newDiv.getElementsByClassName("ListName")[0].innerHTML = lname
+//     newDiv.classList.remove("hidden");
+//     let listdiv = newDiv.querySelectorAll("div")[0]
+//     listdiv.id = "ListCards" + id
+//     frmAddList.parentNode.parentNode.insertBefore(newDiv, frmAddList.parentNode);
+//     // const del = document.getElementById("DeleteAction")
+//     let del = newDiv.querySelector("#DeleteAction");
 
-    del.id = del.id + id
-    del.addEventListener("click", () => deleteList(listdiv))
+//     del.id = del.id + id
+//     del.addEventListener("click", () => deleteList(listdiv))
 
-    // allow drag and drop 
-    newDiv.addEventListener("drop", (event) => drop(event))
-    newDiv.addEventListener("dragover", (event) => allowDrop(event))
-    listdiv.addEventListener("dragstart", (event) => drag(event))
-
-
-    // build cards 
-    let cardsContainer = newDiv.querySelector("#cardsContainer");
-    cardsContainer.id = cardsContainer.id + id
-
-    // loop to create cards
-    cards.map(ca => {
-        createCard(ca.cardName, ca.idcard, cardsContainer)
-
-    })
-
-    // add card functionality
-    const btnAddCardShowForm = newDiv.querySelector("#btnAddCardShowForm")
-    btnAddCardShowForm.id = btnAddCardShowForm.id + id
-
-    // find form to add card
-    const frmAddcard = newDiv.querySelector("#frmAddcard")
-    frmAddcard.id = frmAddcard.id + id
-
-    // find btn to hide form
-    const btnHideAddCardfrm = newDiv.querySelector("#btnHideAddCardfrm")
-    btnHideAddCardfrm.id = btnHideAddCardfrm.id + id
+//     // allow drag and drop 
+//     newDiv.addEventListener("drop", (event) => drop(event))
+//     newDiv.addEventListener("dragover", (event) => allowDrop(event))
+//     listdiv.addEventListener("dragstart", (event) => drag(event))
 
 
-    // show from when btn clicked or hide 
-    btnAddCardShowForm.addEventListener("click", () => showAddOrHideelemnt(frmAddcard, btnAddCardShowForm))
-    btnHideAddCardfrm.addEventListener("click", () => showAddOrHideelemnt(btnAddCardShowForm, frmAddcard))
+//     // build cards 
+//     let cardsContainer = newDiv.querySelector("#cardsContainer");
+//     cardsContainer.id = cardsContainer.id + id
 
-    // find input card name
-    const inpCardName = newDiv.querySelector("#inpCardName")
-    inpCardName.id = inpCardName.id + id
+//     // loop to create cards
+//     cards.map(ca => {
+//         createCard(ca.cardName, ca.idcard, cardsContainer)
+
+//     })
+
+//     // add card functionality
+//     const btnAddCardShowForm = newDiv.querySelector("#btnAddCardShowForm")
+//     btnAddCardShowForm.id = btnAddCardShowForm.id + id
+
+//     // find form to add card
+//     const frmAddcard = newDiv.querySelector("#frmAddcard")
+//     frmAddcard.id = frmAddcard.id + id
+
+//     // find btn to hide form
+//     const btnHideAddCardfrm = newDiv.querySelector("#btnHideAddCardfrm")
+//     btnHideAddCardfrm.id = btnHideAddCardfrm.id + id
 
 
-    // submit from 
-    frmAddcard.addEventListener("submit", (e) => {
-        e.preventDefault();
-        var cardID = cardsContainer.querySelectorAll("h3").length + 1
-        let newCard = createCard(inpCardName.value, cardID + "L" + id, cardsContainer)
-        addCArdToDatabase(newCard, id)
-        inpCardName.value = null
-        showAddOrHideelemnt(btnAddCardShowForm, frmAddcard)
-    })
+//     // show from when btn clicked or hide 
+//     btnAddCardShowForm.addEventListener("click", () => showAddOrHideelemnt(frmAddcard, btnAddCardShowForm))
+//     btnHideAddCardfrm.addEventListener("click", () => showAddOrHideelemnt(btnAddCardShowForm, frmAddcard))
+
+//     // find input card name
+//     const inpCardName = newDiv.querySelector("#inpCardName")
+//     inpCardName.id = inpCardName.id + id
 
 
-}
+//     // submit from 
+//     frmAddcard.addEventListener("submit", (e) => {
+//         e.preventDefault();
+//         var cardID = cardsContainer.querySelectorAll("h3").length + 1
+//         let newCard = createCard(inpCardName.value, cardID + "L" + id, cardsContainer)
+//         addCArdToDatabase(newCard, id)
+//         inpCardName.value = null
+//         showAddOrHideelemnt(btnAddCardShowForm, frmAddcard)
+//     })
+
+
+// }
 
 // create new card function
 
-function createCard(name, id, container) {
-    const divcondrop = document.createElement("div")
-    const divcon = document.createElement("div")
-    const card = document.createElement("h3")
-    const del = document.createElement("div")
-    card.innerText = name
-    card.id = id
-    divcondrop.id = "Bcon" + id
-    divcon.classList.add("singleCard")
-    divcon.id = "con" + id
 
-    divcon.draggable = true
-    divcondrop.addEventListener("drop", (event) => dropCard(event))
-    divcondrop.addEventListener("dragover", (event) => allowDrop(event))
-    divcon.addEventListener("dragstart", (event) => drag(event))
+function createCard(taskname, time, parent) {
+    const cardDummy = document.getElementById("dummy-card")
+    const newCard = document.createElement("div")
+    let list = toDo_list
+    if (parent != null) {
+        list = parent
+        // console.log(list);
+    }
+    const cardsContainer = list.querySelector(".cards-container")
 
-    del.innerHTML = "<i class='fa-regular fa-circle-xmark'></i>"
-    del.addEventListener("click", () => { deleteCArd(divcon, id) })
+    newCard.innerHTML = cardDummy.innerHTML
+    newCard.draggable = true
+    newCard.classList.add("card")
+    newCard.classList.add("flx-bt")
 
-    divcondrop.appendChild(divcon)
-    divcon.appendChild(card)
-    divcon.appendChild(del)
-    container.appendChild(divcondrop)
+    // cardsContainer.addEventListener("drop", (event) => dropCard(event))
+    // cardsContainer.addEventListener("dragover", (event) => allowDrop(event))
+    newCard.addEventListener("dragstart", (event) => drag(event))
+    // console.log(parent);
+    const taskName = newCard.querySelector(".task-name")
+    taskName.innerText = taskname
 
-    return card
+    const timeValue = newCard.querySelector(".time-value")
+
+    timeValue.innerText = time
+
+
+    const deletesy = newCard.querySelector(".fa-xmark")
+    deletesy.addEventListener("click", (e) => {
+        deleteCArd(e)
+    })
+    const myArray = ["yellow", "blue", "burble"];
+
+    const randomIndex = Math.floor(Math.random() * myArray.length);
+
+    const randomItem = myArray[randomIndex];
+    const cir = newCard.querySelector(".cirlce")
+    cir.classList.add(randomItem)
+    cardsContainer.appendChild(newCard)
+    return newCard
 }
-function deleteCArd(contanier, cardID) {
-    contanier.parentNode.removeChild(contanier)
-    deleteCardDB(cardID)
+
+function addCArdToDatabase(name, time) {
+    const card1 = {
+        cardName: name,
+        time: time
+    }
+
+    axios.get(apiurl + `/1`)
+        .then(
+            res => {
+                let newCards = [...res.data.cards, card1]
+
+                axios.put(apiurl + `/1`, { cards: newCards })
+                    .then(res => { console.log(res); }
+                    ).catch(err => { console.log(err); })
+
+            }
+        ).catch(err => { console.log(err); })
+
+}
+
+
+function deleteCArd(e) {
+    let parent = e.target.closest('.card');
+    const name = parent.querySelector('.task-name').innerText;
+    const time = parent.querySelector('.time-value').innerText;
+    parent.parentNode.removeChild(parent)
+    deleteCardDB(name, time)
+
 }
 
 // database handel for card
-function deleteCardDB(cardID) {
-    let listID = cardID.split("L")[1]
-    axios.get(apiurl + `/${listID}`).
+function deleteCardDB(name, time) {
+    axios.get(apiurl).
         then(res => {
-            let newCArds = res.data.cards.filter(card => card.idcard !== cardID)
-            console.log(newCArds)
-            axios.put(apiurl + `/${listID}`, { cards: newCArds })
+            let tasks = res.data;
+
+            let newTasks = tasks.map(task => {
+                task.cards = task.cards.filter(card => card.cardName !== name && card.time !== time);
+                return task;
+            });
+            axios.put(apiurl, newTasks)
                 .then(res => console.log(res))
                 .catch(er => console.log(er))
         })
@@ -220,25 +303,6 @@ function deleteCardDB(cardID) {
 }
 
 
-function addCArdToDatabase(card, id) {
-    const card1 = {
-        cardName: card.innerText,
-        idcard: card.id
-    }
-
-    axios.get(apiurl + `/${id}`)
-        .then(
-            res => {
-                let newCards = [...res.data.cards, card1]
-
-                axios.put(apiurl + `/${id}`, { cards: newCards })
-                    .then(res => { console.log(res); }
-                    ).catch(err => { console.log(err); })
-
-            }
-        ).catch(err => { console.log(err); })
-
-}
 
 
 
@@ -251,226 +315,142 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.stopPropagation()
+    ev.target.id = "draged"
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
 
 function dropCard(ev) {
+    console.log("st");
     ev.preventDefault();
     ev.stopPropagation();
+    console.log("e");
 
     var data = ev.dataTransfer.getData("text");
     var draggedElement = document.getElementById(data);
 
     var dropTarget = ev.target;
-    // console.log("do");
-    if (data.includes("Lis")) {
-        console.log("append");
-        return;
-    }
-    while (!dropTarget.id.includes("con") && !dropTarget.id.includes("B")) {
+    console.log(data);
 
-        dropTarget = dropTarget.parentNode
-
+    if (!dropTarget.classList.contains("cards-container")) {
+        dropTarget = dropTarget.closest(".cards-container");
     }
-    if (dropTarget.id.includes("con")) {
 
-        let [numericId1, numericId2] = swapElements(draggedElement, dropTarget);
-        swapCArdsInDB(numericId1, numericId2)
-    }
+    // console.log(dropTarget);
+    // console.log(draggedElement);
+    dropTarget.appendChild(draggedElement)
+    // moveCardToNewList()
+    const cards1 = getcardsArr(toDo_list)
+    const cards2 = getcardsArr(doing_list)
+    const cards3 = getcardsArr(done_list)
+    moveCardToNewList(cards1, cards2, cards3)
+    draggedElement.id = ""
 }
 
-function drop(ev) {
-    ev.preventDefault();
-    ev.stopPropagation();
+// function drop(ev) {
+//     ev.preventDefault();
+//     ev.stopPropagation();
 
-    var data = ev.dataTransfer.getData("text");
-    var draggedElement = document.getElementById(data);
-    var dropTarget = ev.target;
-
-
-    if (data.includes("con")) {
-
-        return;
-    }
-    while (!dropTarget.id.includes("ListCards")) {
-        dropTarget = dropTarget.parentNode
-    }
+//     var data = ev.dataTransfer.getData("text");
+//     var draggedElement = document.getElementById(data);
+//     var dropTarget = ev.target;
 
 
-    if (dropTarget.id.includes("ListCards")) {
+//     if (data.includes("con")) {
+
+//         return;
+//     }
+//     while (!dropTarget.id.includes("ListCards")) {
+//         dropTarget = dropTarget.parentNode
+//     }
 
 
-        let [numericId1, numericId2] = swapElements(draggedElement, dropTarget);
-        swapElementsInDB(numericId1, numericId2)
+//     if (dropTarget.id.includes("ListCards")) {
 
-    }
+
+//         let [numericId1, numericId2] = swapElements(draggedElement, dropTarget, "L");
+//         swapElementsInDB(numericId1, numericId2)
+
+//     }
+// }
+
+// function swapElements(element1, element2, typ1) {
+//     var parent1 = element1.parentNode;
+//     var parent2 = element2.parentNode;
+//     var id1 = parent1.id
+//     var id2 = parent2.id
+//     parent1.id = id2
+//     parent2.id = id1
+//     console.log(element1);
+//     console.log(element2);
+
+//     console.log(typ1);
+//     if (typ1 == "L") {
+
+//         parent1.append(element2)
+//         parent2.append(element1)
+//         console.log("ch");
+//     }
+//     else {
+//         parent2.parentNode.append(element1)
+//         parent1.parentNode.removeChild(parent1)
+//         console.log("rep");
+
+
+//     }
+
+//     return [id1, id2]
+// }
+
+// function swapElementsInDB(numericId1, numericId2) {
+//     numericId1 = parseInt(numericId1.replace("ListContainer", ""));
+//     numericId2 = parseInt(numericId2.replace("ListContainer", ""));
+
+//     axios.get(apiurl)
+//         .then(res => {
+//             let arr = res.data
+
+//             const index1 = arr.findIndex(l1 => l1.id === numericId1);
+//             const index2 = arr.findIndex(l1 => l1.id === numericId2);
+//             [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
+
+//             axios.put(apiurl, arr)
+//                 .then(res => console.log(res))
+//                 .catch(er => console.log(er))
+
+//         })
+//         .catch(er => console.log(er))
+// }
+
+function getcardsArr(parent) {
+    let cardDivs = parent.querySelectorAll(".card");
+    let newarr = []
+    cardDivs.forEach(card => {
+        const name = card.querySelector('.task-name').innerText;
+        const time = card.querySelector('.time-value').innerText;
+        const CardData = {
+            cardName: name,
+            time: time
+        }
+        newarr.push(CardData)
+    })
+    return newarr;
 }
 
-function swapElements(element1, element2) {
-    var parent1 = element1.parentNode;
-    var parent2 = element2.parentNode;
-    var id1 = parent1.id
-    var id2 = parent2.id
-    parent1.id = id2
-    parent2.id = id1
 
-    parent1.append(element2)
-    parent2.append(element1)
-
-
-    return [id1, id2]
-}
-
-function swapElementsInDB(numericId1, numericId2) {
-    numericId1 = parseInt(numericId1.replace("ListContainer", ""));
-    numericId2 = parseInt(numericId2.replace("ListContainer", ""));
+function moveCardToNewList(arr1, arr2, arr3) {
 
     axios.get(apiurl)
-        .then(res => {
-            let arr = res.data
+        .then(sourceListResponse => {
 
-            const index1 = arr.findIndex(l1 => l1.id === numericId1);
-            const index2 = arr.findIndex(l1 => l1.id === numericId2);
-            [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
-
-            axios.put(apiurl, arr)
-                .then(res => console.log(res))
-                .catch(er => console.log(er))
-
+            const lists = sourceListResponse.data
+            lists[0].cards = arr1
+            lists[1].cards = arr2
+            lists[2].cards = arr3
+            axios.put(apiurl, lists).then(
+                res => console.log(res)
+            ).catch(error => console.log(error));
         })
-        .catch(er => console.log(er))
+
+        .catch(error => console.log(error));
 }
-
-
-
-
-function swapCArdsInDB(numericId1, numericId2) {
-    const el1ID = numericId1.replace("Bcon", '');
-    const el2ID = numericId2.replace("Bcon", '');
-
-    const L1ID = el1ID.split("L")[1]
-    const L2ID = el2ID.split("L")[1]
-
-    if (L2ID === L1ID) {
-        axios.get(apiurl + `/${L2ID}`)
-            .then(res => {
-                let arr = res.data.cards
-                const index1 = arr.findIndex(l1 => l1.idcard === el1ID);
-                const index2 = arr.findIndex(l1 => l1.idcard === el2ID);
-                [arr[index1], arr[index2]] = [arr[index2], arr[index1]];
-
-                axios.put(apiurl + `/${L2ID}`, { cards: [...arr] })
-                    .then(res => console.log(res.data.cards))
-                    .catch(er => console.log(er))
-
-            })
-            .catch(er => console.log(er))
-    }
-    else {
-        axios.get(apiurl + `/${L1ID}`)
-            .then(res1 => {
-
-
-                let arr1 = res1.data.cards
-                console.log("arr1");
-                console.log(arr1);
-                // let index1 = arr1.findIndex(l1 => l1.idcard === el1ID);
-                let index1 = arr1.findIndex(l1 => {
-                    return l1.idcard === el1ID;
-                });
-                let newArr1 = arr1.filter(l1 => l1.idcard !== el1ID);
-                let cid1 = arr1[index1].idcard
-                console.log("newArr1");
-                console.log(newArr1);
-
-
-
-
-                axios.get(apiurl + `/${L2ID}`)
-                    .then(res2 => {
-                        let arr2 = res2.data.cards
-
-                        let index2 = arr2.findIndex(l1 => l1.idcard === el2ID);
-                        let newArr2 = arr2.filter(l1 => l1.idcard !== el2ID);
-
-
-
-
-
-                        //   replace ids
-                        let cid2 = arr2[index2].idcard
-                        arr1[index1].idcard = cid2
-                        arr2[index2].idcard = cid1
-
-
-
-                        // update the DB
-                        let newArray1 = []
-
-                        if (index2 > 0) {
-
-                            newArray1 = [...newArr2.slice(0, index2), arr1[index1], ...newArr2.slice(index2, newArr2.length)];
-                        }
-                        else {
-                            newArray1 = [...newArr2, arr1[index1]];
-
-                        }
-
-
-
-                        axios.put(apiurl + `/${L2ID}`, { cards: newArray1 })
-                            .then(res2 => console.log(res2.data))
-                            .catch(er => console.log(er))
-
-                        let newArray2 = []
-                        if (index1 > 0) {
-
-                            newArray2 = [...newArr1.slice(0, index1), arr2[index2], ...newArr1.slice(index1, newArr1.length)];
-                        }
-                        else {
-                            newArray2 = [...newArr1, arr2[index2]];
-
-                        }
-
-
-
-
-                        axios.put(apiurl + `/${L1ID}`, { cards: newArray2 })
-                            .then(res => console.log(res.data))
-                            .catch(er => console.log(er))
-
-                        let d1 = document.getElementById(numericId1)
-                        d1.id = "Bcon" + cid2
-                        let d2 = document.getElementById(numericId2)
-                        d2.id = "Bcon" + cid1
-
-
-                        let d3 = document.getElementById(numericId1.replace("B", ""))
-                        d3.id = "con" + cid2
-
-
-                        let d4 = document.getElementById(numericId2.replace("B", ""))
-                        d4.id = "con" + cid1
-
-                        document.getElementById(cid2).id = cid1
-                        document.getElementById(cid1).id = cid2
-
-                    })
-                    .catch(er => console.log(er))
-
-
-
-
-
-            })
-            .catch(er => console.log(er))
-
-
-
-
-    }
-}
-
-
-
